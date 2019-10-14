@@ -1,6 +1,13 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "license": "GPL-3.0",
+    "name": "kacper-wojtaszczyk/simple-rss-reader",
+    "authors": [
+        {
+            "name": "Kacper Wojtaszczyk",
+            "email": "kacper.wojtaszczyk95@gmail.com"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",
@@ -9,9 +16,16 @@
         "symfony/dotenv": "4.3.*",
         "symfony/flex": "^1.3.1",
         "symfony/framework-bundle": "4.3.*",
-        "symfony/yaml": "4.3.*"
+        "symfony/messenger": "4.3.*",
+        "symfony/yaml": "4.3.*",
+        "doctrine/orm": "^2.5.11",
+        "doctrine/doctrine-bundle": "^1.6.10",
+        "doctrine/doctrine-migrations-bundle": "^1.3|^2.0",
+        "symfony/twig-bundle": "4.3.*"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "codeception/codeception": "^3.1"
     },
     "config": {
         "preferred-install": {
@@ -21,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "KacperWojtaszczyk\\SimpleRssReader\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "KacperWojtaszczyk\\SimpleRssReader\\Tests\\": "tests/"
         }
     },
     "replace": {
@@ -54,7 +68,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "4.3.*"
         }
     }
