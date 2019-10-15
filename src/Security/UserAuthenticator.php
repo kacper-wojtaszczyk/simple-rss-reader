@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace KacperWojtaszczyk\SimpleRssReader\Security;
 
@@ -38,8 +39,8 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request): bool
     {
-        return 'login' === $request->attributes->get('_route')
-            && $request->isMethod('POST');
+        return $request->isMethod('POST')
+            && 'login' === $request->attributes->get('_route');
     }
 
     public function getCredentials(Request $request): array

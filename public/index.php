@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use KacperWojtaszczyk\SimpleRssReader\Kernel;
 use Symfony\Component\Debug\Debug;
