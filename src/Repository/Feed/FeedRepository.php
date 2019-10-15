@@ -1,27 +1,27 @@
 <?php
 declare(strict_types=1);
 
-namespace KacperWojtaszczyk\SimpleRssReader\Repository;
+namespace KacperWojtaszczyk\SimpleRssReader\Repository\Feed;
 
-use KacperWojtaszczyk\SimpleRssReader\Model\Entry;
+use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Feed;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Entry|null find($id, $lockMode = null, $lockVersion = null)
- * @method Entry|null findOneBy(array $criteria, array $orderBy = null)
- * @method Entry[]    findAll()
- * @method Entry[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Feed|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Feed|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Feed[]    findAll()
+ * @method Feed[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EntryRepository extends ServiceEntityRepository
+class FeedRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Entry::class);
+        parent::__construct($registry, Feed::class);
     }
 
     // /**
-    //  * @return Entry[] Returns an array of Feed objects
+    //  * @return Feed[] Returns an array of Feed objects
     //  */
     /*
     public function findByExampleField($value)
@@ -38,7 +38,7 @@ class EntryRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Entry
+    public function findOneBySomeField($value): ?Feed
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.exampleField = :val')

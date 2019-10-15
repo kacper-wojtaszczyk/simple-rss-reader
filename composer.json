@@ -2,6 +2,7 @@
     "type": "project",
     "license": "GPL-3.0",
     "name": "kacper-wojtaszczyk/simple-rss-reader",
+    "description": "Simply read RSS feed",
     "authors": [
         {
             "name": "Kacper Wojtaszczyk",
@@ -9,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^1.6.10",

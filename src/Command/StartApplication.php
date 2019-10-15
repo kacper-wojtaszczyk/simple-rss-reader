@@ -8,12 +8,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 final class StartApplication extends Command
 {
     protected static $defaultName = 'srr:start';
 
-    public function __construct(bool $requirePassword = false)
+    public function __construct()
     {
         parent::__construct();
     }

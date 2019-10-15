@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace KacperWojtaszczyk\SimpleRssReader\Model;
+namespace KacperWojtaszczyk\SimpleRssReader\Model\User;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="KacperWojtaszczyk\SimpleRssReader\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="KacperWojtaszczyk\SimpleRssReader\Repository\User\UserRepository")
  */
 class User implements UserInterface
 {

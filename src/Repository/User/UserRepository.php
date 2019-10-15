@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace KacperWojtaszczyk\SimpleRssReader\Repository;
+namespace KacperWojtaszczyk\SimpleRssReader\Repository\User;
 
-use KacperWojtaszczyk\SimpleRssReader\Model\User;
+use KacperWojtaszczyk\SimpleRssReader\Model\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
