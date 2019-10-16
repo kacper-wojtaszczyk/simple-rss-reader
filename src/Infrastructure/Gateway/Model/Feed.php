@@ -75,7 +75,11 @@ class Feed
     /**
      * @var Entry[]|ArrayCollection
      */
-    private $entry;
+    public $entry;
+    /**
+     * @var string
+     */
+    public $url;
 
     public function __construct()
     {

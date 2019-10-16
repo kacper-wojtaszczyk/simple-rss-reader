@@ -3,8 +3,14 @@ declare(strict_types=1);
 
 namespace KacperWojtaszczyk\SimpleRssReader\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
+use KacperWojtaszczyk\SimpleRssReader\Form\UserType;
+use KacperWojtaszczyk\SimpleRssReader\Model\User\User;
+use KacperWojtaszczyk\SimpleRssReader\Repository\User\UserRepository;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -30,11 +36,31 @@ class UserController
      */
     private $urlGenerator;
 
-    public function __construct(Environment $twig, Security $security, UrlGeneratorInterface $urlGenerator)
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    public function __construct(Environment $twig, Security $security, UrlGeneratorInterface $urlGenerator,
+                                UserRepository $userRepository, FormFactoryInterface $formFactory,
+                                EntityManagerInterface $em)
     {
         $this->security = $security;
         $this->twig = $twig;
         $this->urlGenerator = $urlGenerator;
+        $this->userRepository = $userRepository;
+        $this->formFactory = $formFactory;
+        $this->em = $em;
     }
 
     /**
@@ -56,19 +82,41 @@ class UserController
     /**
      * @Route("/register", name="register")
      */
-    public function register(): Response
+    public function register(Request $request): Response
     {
-        $content = $this->twig->render('user/register.html.twig');
+        $user = new User();
 
+        $form = $this->getForm($user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $form->getData();
+
+            $this->em->persist($user);
+            $this->em->flush();
+            return RedirectResponse::create($this->urlGenerator->generate('feed'));
+        }
+        $content = $this->twig->render('user/register.html.twig', [
+            'form' => $form->createView()
+        ]);
         return Response::create($content, Response::HTTP_OK);
+    }
+
+    private function getForm($data = null)
+    {
+        return $this->formFactory->create(UserType::class, $data);
     }
 
     /**
      * @Route("/_ajax/validate-email", name="ajax_validate_email")
      */
-    public function validateEmail(): Response
+    public function validateEmail(Request $request): Response
     {
-        //TODO implement email validation
+        if(null !== $this->userRepository->findOneBy(['email' => $request->request->get('email')]))
+        {
+            return JsonResponse::create(true, Response::HTTP_CONFLICT);
+        }
         return JsonResponse::create(true, Response::HTTP_OK);
     }
 

@@ -23,6 +23,12 @@ class Word
      */
     private $count;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Feed", inversedBy="word")
+     * @var Feed
+     */
+    private $feed;
+
     public static function withWord($word): self
     {
         $self = new self;

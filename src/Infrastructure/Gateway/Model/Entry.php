@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Category;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Content;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Link;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Person;

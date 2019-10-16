@@ -124,7 +124,7 @@ class Entry
      * @param \DateTime $updated
      * @return Entry
      */
-    public function setUpdated(\DateTime $updated): Entry
+    public function setUpdated(\DateTime $updated): self
     {
         $this->updated = $updated;
         return $this;
@@ -146,7 +146,7 @@ class Entry
      * @param ArrayCollection|Person[] $author
      * @return Entry
      */
-    public function setAuthor($author)
+    public function setAuthor($author): self
     {
         $this->author = $author;
         return $this;
@@ -164,7 +164,7 @@ class Entry
      * @param ArrayCollection|Link[] $link
      * @return Entry
      */
-    public function setLink($link)
+    public function setLink($link): self
     {
         $this->link = $link;
         return $this;
@@ -182,7 +182,7 @@ class Entry
      * @param string $title
      * @return Entry
      */
-    public function setTitle(string $title): Entry
+    public function setTitle(string $title): self
     {
         $this->title = $title;
         return $this;
@@ -200,7 +200,7 @@ class Entry
      * @param string $summary
      * @return Entry
      */
-    public function setSummary(string $summary): Entry
+    public function setSummary(string $summary): self
     {
         $this->summary = $summary;
         return $this;
@@ -218,25 +218,25 @@ class Entry
      * @param ArrayCollection|Category[] $category
      * @return Entry
      */
-    public function setCategory($category)
+    public function setCategory($category): self
     {
         $this->category = $category;
         return $this;
     }
 
     /**
-     * @return ArrayCollection|Content[]
+     * @return Content
      */
-    public function getContent()
+    public function getContent(): Content
     {
         return $this->content;
     }
 
     /**
-     * @param ArrayCollection|Content[] $content
+     * @param Content $content
      * @return Entry
      */
-    public function setContent($content)
+    public function setContent(Content $content = null): self
     {
         $this->content = $content;
         return $this;
@@ -254,7 +254,7 @@ class Entry
      * @param ArrayCollection|Person[] $contributor
      * @return Entry
      */
-    public function setContributor($contributor)
+    public function setContributor($contributor): self
     {
         $this->contributor = $contributor;
         return $this;
@@ -272,7 +272,7 @@ class Entry
      * @param \DateTime $published
      * @return Entry
      */
-    public function setPublished(\DateTime $published): Entry
+    public function setPublished(\DateTime $published = null): self
     {
         $this->published = $published;
         return $this;
@@ -294,7 +294,7 @@ class Entry
      * @param string $rights
      * @return Entry
      */
-    public function setRights(string $rights): Entry
+    public function setRights(string $rights = null): self
     {
         $this->rights = $rights;
         return $this;

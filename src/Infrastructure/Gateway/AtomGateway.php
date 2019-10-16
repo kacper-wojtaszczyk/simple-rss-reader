@@ -9,36 +9,30 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Exception\XmlNotValidException;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Parser\FeedParser;
-use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Feed;
-use KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository;
+use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Model\Feed as FeedDTO;
 
-class FeedGateway
+class AtomGateway implements GatewayInterface
 {
     /**
      * @var Client
      */
     private $client;
-    /**
-     * @var FeedRepository
-     */
-    private $feedRepository;
 
-    public function __construct(Client $client, FeedRepository $feedRepository)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->feedRepository = $feedRepository;
     }
 
-    public function requestFeed(string $url): Feed
+    public function requestFeed(string $url): FeedDTO
     {
-        try{
+        try {
             $response = $this->client->get($url);
-            $parser = FeedParser::forResponse($url, $response);
-            return $parser->parse();
-
         } catch (ClientException | ServerException $e) {
             throw XmlNotValidException::withUrl($url);
         }
+
+        $parser = FeedParser::forResponse($url, $response);
+        return $parser->parse();
     }
 
 }

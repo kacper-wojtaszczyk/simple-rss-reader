@@ -20,12 +20,13 @@ class Link implements ValueObject
      */
     private $href;
 
-    public static function fromData(string $type, string $rel, string $href)
+    public static function fromData(string $type, string $rel, string $href): self
     {
         $self = new self;
         $self->type = $type;
         $self->rel = $rel;
         $self->href = $href;
+        return $self;
     }
 
     public function equals(ValueObject $other): bool

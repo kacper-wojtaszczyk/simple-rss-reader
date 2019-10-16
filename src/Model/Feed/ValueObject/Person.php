@@ -20,12 +20,13 @@ class Person implements ValueObject
      */
     private $uri;
 
-    public static function fromData(string $name, string $email, string $uri)
+    public static function fromData(string $name, string $email = null, string $uri = null): self
     {
         $self = new self;
         $self->name = $name;
         $self->email = $email;
         $self->uri = $uri;
+        return $self;
     }
 
     public function equals(ValueObject $other): bool

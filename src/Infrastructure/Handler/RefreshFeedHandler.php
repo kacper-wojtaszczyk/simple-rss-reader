@@ -3,43 +3,87 @@ declare(strict_types=1);
 
 namespace KacperWojtaszczyk\SimpleRssReader\Infrastructure\Handler;
 
-use GuzzleHttp\ClientInterface;
+use Doctrine\ORM\EntityManager;
+use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\GatewayInterface;
+use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Mapper\EntryMapper;
+use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Mapper\FeedMapper;
+use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Entry;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Exception\FeedNotExistsException;
+use KacperWojtaszczyk\SimpleRssReader\Repository\Feed\EntryRepository;
 use KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Message\RefreshFeed;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 final class RefreshFeedHandler implements MessageHandlerInterface
 {
-    /**
-     * @var ClientInterface
-     */
-    private $client;
-
     /**
      * @var FeedRepository
      */
     private $feedRepository;
 
-    public function __construct(ClientInterface $client, FeedRepository $feedRepository)
+    /**
+     * @var GatewayInterface
+     */
+    private $gateway;
+
+    /**
+     * @var EntityManager
+     */
+    private $em;
+
+    /**
+     * @var EntryRepository
+     */
+    private $entryRepository;
+
+    /**
+     * @var MessageBusInterface
+     */
+    private $bus;
+
+    public function __construct(GatewayInterface $gateway, EntryRepository $entryRepository,
+                                FeedRepository $feedRepository, EntityManager $em, MessageBusInterface $bus)
     {
-        $this->client = $client;
+        $this->gateway = $gateway;
         $this->feedRepository = $feedRepository;
+        $this->em = $em;
+        $this->entryRepository = $entryRepository;
+        $this->bus = $bus;
     }
 
     public function __invoke(RefreshFeed $message)
     {
         $feed = $this->feedRepository->find($message->getFeedId());
-        $this->feedRepository;
+        try {
 
-//        if ($feed === null) {
-//            throw FeedNotExistsException::withFeedId($message->getFeedId());
-//        }
-//
-//        try {
-//            //$feed->sendStatusNotification($this->client);
-//        } finally {
-//            $this->sessionCollection->save($feed);
-//        }
+            if ($feed === null) {
+                throw FeedNotExistsException::withFeedId($message->getFeedId());
+            }
+
+            $feedDTO = $this->gateway->requestFeed($feed->getUrl());
+            $feedMapper = new FeedMapper();
+            $feed = $feedMapper->map($feedDTO, $feed);
+            $this->em->persist($feed);
+            $entryMapper = new EntryMapper();
+            foreach($feedDTO->entry as $entryDTO)
+            {
+                if($entry = $this->entryRepository->findOneById($entryDTO->id, $feed))
+                {
+                    $entry = $entryMapper->map($entryDTO, $entry);
+                    $this->em->persist($entry);
+                }
+                else {
+                    $entry = $entryMapper->map($entryDTO, Entry::withIdAndFeed($entryDTO->id, $feed));
+                    $this->em->persist($entry);
+                }
+            }
+            $this->em->flush();
+        }
+        finally {
+                $newMessage = RefreshFeed::forFeed($feed->getId());
+                $this->bus->dispatch($newMessage, [new DelayStamp(210000)]);
+        }
     }
 }

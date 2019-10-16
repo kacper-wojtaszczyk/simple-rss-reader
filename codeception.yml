@@ -2,7 +2,7 @@ namespace: KacperWojtaszczyk\SimpleRssReader\Tests
 paths:
     tests: tests
     output: var/tests/_output
-    data: var/tests/_data
+    data: tests/_data
     support: tests/_support
     envs: tests/_envs
 actor_suffix: Tester

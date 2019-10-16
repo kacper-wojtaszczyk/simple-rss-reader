@@ -6,6 +6,7 @@ namespace KacperWojtaszczyk\SimpleRssReader\Repository\Feed;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Entry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Feed;
 
 /**
  * @method Entry|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,32 +21,13 @@ class EntryRepository extends ServiceEntityRepository
         parent::__construct($registry, Entry::class);
     }
 
-    // /**
-    //  * @return Entry[] Returns an array of Feed objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findOneById(string $id, Feed $feed): Entry
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.id = :id')
+            ->andWhere('e.feed = :feed')
+            ->setParameters(['id' => $id, 'feed' => $feed])
             ->getQuery()
-            ->getResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Entry
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

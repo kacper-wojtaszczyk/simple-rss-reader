@@ -33,7 +33,7 @@ class Feed
      * @ORM\Column(type="json", nullable=true)
      * @var Link[]|ArrayCollection
      */
-    private $links;
+    private $link;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -109,6 +109,12 @@ class Feed
      */
     private $url;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Word", mappedBy="feed")
+     * @var Word[]|ArrayCollection
+     */
+    private $word;
+
 
 
     public static function withIdAndUrl(string $id, string $url): self
@@ -145,18 +151,18 @@ class Feed
     /**
      * @return ArrayCollection|Link[]
      */
-    public function getLinks()
+    public function getLink()
     {
-        return $this->links;
+        return $this->link;
     }
 
     /**
-     * @param ArrayCollection|Link[] $links
+     * @param ArrayCollection|Link[] $link
      * @return Feed
      */
-    public function setLinks($links)
+    public function setLink($link)
     {
-        $this->links = $links;
+        $this->link = $link;
         return $this;
     }
 
@@ -172,7 +178,7 @@ class Feed
      * @param string $rights
      * @return Feed
      */
-    public function setRights(string $rights): Feed
+    public function setRights(string $rights = null): Feed
     {
         $this->rights = $rights;
         return $this;
@@ -208,7 +214,7 @@ class Feed
      * @param string $icon
      * @return Feed
      */
-    public function setIcon(string $icon): Feed
+    public function setIcon(string $icon = null): Feed
     {
         $this->icon = $icon;
         return $this;
@@ -226,7 +232,7 @@ class Feed
      * @param string $subtitle
      * @return Feed
      */
-    public function setSubtitle(string $subtitle): Feed
+    public function setSubtitle(string $subtitle = null): Feed
     {
         $this->subtitle = $subtitle;
         return $this;
@@ -244,7 +250,7 @@ class Feed
      * @param string $logo
      * @return Feed
      */
-    public function setLogo(string $logo): Feed
+    public function setLogo(string $logo = null): Feed
     {
         $this->logo = $logo;
         return $this;
@@ -316,7 +322,7 @@ class Feed
      * @param string $generator
      * @return Feed
      */
-    public function setGenerator(string $generator): Feed
+    public function setGenerator(string $generator = null): Feed
     {
         $this->generator = $generator;
         return $this;
@@ -346,5 +352,10 @@ class Feed
     public function getEntry(): ArrayCollection
     {
         return $this->entry;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }
