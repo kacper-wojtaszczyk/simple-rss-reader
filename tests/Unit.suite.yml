@@ -4,6 +4,13 @@
 
 actor: UnitTester
 modules:
-    enabled:
-        - Asserts
-        - \KacperWojtaszczyk\SimpleRssReader\Tests\Helper\Unit
+  enabled:
+    - Symfony:
+        app_path: 'src'
+        environment: 'test'
+        kernel_class: 'KacperWojtaszczyk\SimpleRssReader\Kernel'
+    - Doctrine2:
+        depends: Symfony
+        cleanup: true
+    - Asserts
+    - \KacperWojtaszczyk\SimpleRssReader\Tests\Helper\Unit

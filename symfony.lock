@@ -114,6 +114,18 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "eightpoints/guzzle-bundle": {
+        "version": "7.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "7.0",
+            "ref": "7babb21a3928e44e485391907e3abc346804e0d2"
+        },
+        "files": [
+            "config/packages/eight_points_guzzle.yaml"
+        ]
+    },
     "facebook/webdriver": {
         "version": "1.7.1"
     },
@@ -331,6 +343,9 @@
     "symfony/event-dispatcher-contracts": {
         "version": "v1.1.7"
     },
+    "symfony/expression-language": {
+        "version": "v4.3.5"
+    },
     "symfony/filesystem": {
         "version": "v4.3.5"
     },
@@ -506,6 +521,15 @@
             "config/packages/test/web_profiler.yaml",
             "config/routes/dev/web_profiler.yaml"
         ]
+    },
+    "symfony/web-server-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
+        }
     },
     "symfony/yaml": {
         "version": "v4.3.5"

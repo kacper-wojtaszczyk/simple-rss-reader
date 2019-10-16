@@ -103,15 +103,23 @@ class Feed
      */
     private $entry;
 
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    private $url;
 
-    public static function withId(string $id): self
+
+
+    public static function withIdAndUrl(string $id, string $url): self
     {
         $self = new self;
         $self->id = $id;
+        $self->url = $url;
         return $self;
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
         return $this->id;
     }

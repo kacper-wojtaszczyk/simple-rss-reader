@@ -11,7 +11,8 @@ modules:
         - Symfony:
             app_path: 'src'
             environment: 'test'
-#        - Doctrine2:
-#            depends: Symfony
-#            cleanup: true
+            kernel_class: 'KacperWojtaszczyk\SimpleRssReader\Kernel'
+        - Doctrine2:
+            depends: Symfony
+            cleanup: true
         - \KacperWojtaszczyk\SimpleRssReader\Tests\Helper\Functional

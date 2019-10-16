@@ -61,7 +61,7 @@ class Entry
 
     /**
      * @ORM\Column(type="json", nullable=true)
-     * @var Content[]|ArrayCollection
+     * @var Content
      */
     private $content;
 

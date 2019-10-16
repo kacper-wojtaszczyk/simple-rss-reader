@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace KacperWojtaszczyk\SimpleRssReader\Tests;
 
+use Codeception\Scenario;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -20,9 +23,25 @@ namespace KacperWojtaszczyk\SimpleRssReader\Tests;
 */
 class UnitTester extends \Codeception\Actor
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
     use _generated\UnitTesterActions;
 
    /**
     * Define custom actions here
     */
+
+    public function __construct(Scenario $scenario)
+    {
+        parent::__construct($scenario);
+        $this->container = $this->grabService('test.service_container');
+    }
+
+    public function grabSymfonyService($serviceName)
+    {
+        return $this->container->get($serviceName);
+    }
 }

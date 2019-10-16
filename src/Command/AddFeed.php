@@ -9,9 +9,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class StartApplication extends Command
+final class AddFeed extends Command
 {
-    protected static $defaultName = 'srr:start';
+    protected static $defaultName = 'srr:feed:add';
 
     public function __construct()
     {
@@ -21,8 +21,9 @@ final class StartApplication extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Starts the application')
-            ->setHelp('This command starts the application on Symfony Web Server')
+            ->setDescription('Adds a new feed')
+            ->setHelp('This command adds a new RSS feed')
+            ->addArgument('url', 'u', InputArgument::REQUIRED, 'url to RSS feed')
             ->addOption('cache', 'c', InputOption::VALUE_NONE,
                 "Run in cached mode (feed entries will be persisted to DB)")
         ;
