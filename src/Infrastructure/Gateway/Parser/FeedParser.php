@@ -5,13 +5,13 @@ namespace KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Parser;
 
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Exception\MissingAtomNodeException;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Exception\XmlNotValidException;
+use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Model\Entry as EntryDTO;
+use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Model\Feed as FeedDTO;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Category;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Content;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Link;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Person;
 use Psr\Http\Message\ResponseInterface;
-use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Model\Feed as FeedDTO;
-use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Model\Entry as EntryDTO;
 
 final class FeedParser
 {
@@ -83,9 +83,9 @@ final class FeedParser
                 case 'link':
                     $type = $this->reader->getAttribute('type');
                     $link = Link::fromData(
+                        $this->reader->getAttribute('href'),
                         $this->reader->getAttribute('type'),
-                        $this->reader->getAttribute('rel'),
-                        $this->reader->getAttribute('href')
+                        $this->reader->getAttribute('rel')
                     );
                     $feed->link->add($link);
                     break;
@@ -194,9 +194,9 @@ final class FeedParser
                     break;
                 case 'link':
                     $link = Link::fromData(
-                        $this->reader->getAttribute('type'),
+                        $this->reader->getAttribute('href'),
                         $this->reader->getAttribute('rel'),
-                        $this->reader->getAttribute('href')
+                        $this->reader->getAttribute('type')
                     );
                     $entry->link->add($link);
                     break;

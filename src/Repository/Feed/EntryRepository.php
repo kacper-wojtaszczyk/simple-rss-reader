@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace KacperWojtaszczyk\SimpleRssReader\Repository\Feed;
 
-use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Entry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Entry;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Feed;
 
 /**
@@ -21,7 +21,7 @@ class EntryRepository extends ServiceEntityRepository
         parent::__construct($registry, Entry::class);
     }
 
-    public function findOneById(string $id, Feed $feed): Entry
+    public function findOneById(string $id, Feed $feed): ?Entry
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.id = :id')
