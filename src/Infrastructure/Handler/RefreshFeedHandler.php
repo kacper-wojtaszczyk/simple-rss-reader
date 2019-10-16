@@ -7,12 +7,12 @@ use Doctrine\ORM\EntityManager;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\GatewayInterface;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Mapper\EntryMapper;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Mapper\FeedMapper;
+use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Message\RefreshFeed;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Entry;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Exception\FeedNotExistsException;
 use KacperWojtaszczyk\SimpleRssReader\Repository\Feed\EntryRepository;
 use KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Message\RefreshFeed;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
 

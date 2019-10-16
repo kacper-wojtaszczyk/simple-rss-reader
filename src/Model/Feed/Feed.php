@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Link;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Person;
-use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Category;
 
 /**
  * @ORM\Entity(repositoryClass="KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository")

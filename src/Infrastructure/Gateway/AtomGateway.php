@@ -8,8 +8,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Exception\XmlNotValidException;
-use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Parser\FeedParser;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Model\Feed as FeedDTO;
+use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Parser\FeedParser;
 
 class AtomGateway implements GatewayInterface
 {

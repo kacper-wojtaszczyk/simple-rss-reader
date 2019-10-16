@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Mapper;
 
 
-use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Feed;
 use KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\Model\Feed as FeedDTO;
+use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Feed;
 
 final class FeedMapper
 {
