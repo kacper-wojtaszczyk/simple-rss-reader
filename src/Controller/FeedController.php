@@ -6,6 +6,7 @@ namespace KacperWojtaszczyk\SimpleRssReader\Controller;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Exception\NoFeedExistsException;
 use KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -42,12 +43,12 @@ class FeedController
     }
 
     /**
-     * @Route("/_ajax/single-feed/{id}", name="single_feed", requirements={"id"=".+"})
+     * @Route("/_ajax/single-feed", name="single_feed")
      * @IsGranted("ROLE_USER")
      */
-    public function renderSingleFeed(string $id)
+    public function renderSingleFeed(Request $request)
     {
-        $feed = $this->feedRepository->findOneBy(['id' => $id]);
+        $feed = $this->feedRepository->findOneBy(['id' => $request->request->get('id')]);
         $content = $this->twig->render('feed/singleFeed.html.twig', ['feed' => $feed]);
         return Response::create($content, Response::HTTP_OK);
     }

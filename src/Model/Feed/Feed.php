@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace KacperWojtaszczyk\SimpleRssReader\Model\Feed;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Link;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\ValueObject\Person;
@@ -346,9 +347,9 @@ class Feed
     }
 
     /**
-     * @return Entry[]|ArrayCollection
+     * @return Entry[]|Collection
      */
-    public function getEntry(): ArrayCollection
+    public function getEntry(): Collection
     {
         return $this->entry;
     }

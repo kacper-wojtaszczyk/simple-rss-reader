@@ -50,7 +50,7 @@ final class CreateFeedHandler implements MessageHandlerInterface
 
     public function __invoke(CreateFeed $message)
     {
-        try {
+
             $feedDTO = $this->gateway->requestFeed($message->getUrl());
             if($this->feedRepository->find($feedDTO->id))
             {
@@ -66,10 +66,9 @@ final class CreateFeedHandler implements MessageHandlerInterface
                 $this->em->persist($entry);
             }
             $this->em->flush();
-        } finally {
             $newMessage = RefreshFeed::forFeed($feedDTO->id);
             $this->bus->dispatch($newMessage, [new DelayStamp(210000)]);
-        }
+
 
     }
 }

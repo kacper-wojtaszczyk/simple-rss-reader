@@ -50,7 +50,7 @@ class Person implements ValueObject
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -58,7 +58,7 @@ class Person implements ValueObject
     /**
      * @return string
      */
-    public function getUri(): string
+    public function getUri(): ?string
     {
         return $this->uri;
     }

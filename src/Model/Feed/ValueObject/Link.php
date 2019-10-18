@@ -42,7 +42,7 @@ class Link implements ValueObject
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -50,7 +50,7 @@ class Link implements ValueObject
     /**
      * @return string
      */
-    public function getRel(): string
+    public function getRel(): ?string
     {
         return $this->rel;
     }

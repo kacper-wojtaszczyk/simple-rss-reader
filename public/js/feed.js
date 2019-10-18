@@ -22,9 +22,10 @@ function renderSingleFeedHeading(heading) {
 function renderSingleFeedBody(id) {
     showOverlay
     $.ajax(
-        '/_ajax/single-feed/' + id,
+        '/_ajax/single-feed',
         {
-            method: "GET",
+            data: {id: id},
+            method: "POST",
             error: function (j, t, s) {
                 alert("There was an error processing your request: " + s);
             },
