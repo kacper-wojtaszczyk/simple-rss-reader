@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% block title %}Your Feeds{% endblock %}
+{% block title_h1 %}Your Feeds{% endblock %}
+{% block body %}
+    <ul id="feedsList">
+
+    </ul>
+    <div id="feedHolder"></div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let headings = {{ feeds|raw }};
+    </script>
+    <script src="{{ asset('js/feed.js') }}"></script>
+
+{% endblock %}
+{% block overlay %}
+    <div id="overlay">
+        <div class="absolutelyCenter">
+            <div class="lds-facebook">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

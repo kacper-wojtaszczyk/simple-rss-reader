@@ -1,0 +1,94 @@
+input[type=text], input[type=email], input[type=password] {
+    width: 50%;
+}
+
+html,
+body {
+    height: 100%;
+    position: relative;
+}
+
+.absolutelyCenter {
+    position: absolute;
+    top: 50%;
+    margin-top: -32px;
+    left: 50%;
+    margin-left: -32px;
+}
+
+#loginBar {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 8px 15px;
+    color: #fff;
+}
+
+#loginBar a {
+    color: #bbbbbb;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.lds-facebook {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 6px;
+    width: 13px;
+    background: #fff;
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+    left: 6px;
+    animation-delay: -0.24s;
+}
+
+.lds-facebook div:nth-child(2) {
+    left: 26px;
+    animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(3) {
+    left: 45px;
+    animation-delay: 0s;
+}
+
+@keyframes lds-facebook {
+    0% {
+        top: 6px;
+        height: 51px;
+    }
+    50%, 100% {
+        top: 19px;
+        height: 26px;
+    }
+}
+
+.error .emailToValidate {
+    background-color: #ff8888;
+}
+
+.error label::after {
+    content: "User with this email already exists";
+    color: #ff8888;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.feedIcon {
+    height: 1em;
+    vertical-align: middle;
+}

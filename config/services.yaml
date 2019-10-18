@@ -1,0 +1,41 @@
+parameters:
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  KacperWojtaszczyk\SimpleRssReader\Controller\:
+    resource: '../src/Controller'
+    tags: ['controller.service_arguments']
+
+
+  KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository: ~
+  KacperWojtaszczyk\SimpleRssReader\Repository\Feed\EntryRepository: ~
+  KacperWojtaszczyk\SimpleRssReader\Repository\User\UserRepository: ~
+  KacperWojtaszczyk\SimpleRssReader\Command\AddFeed:
+    tags: ['controller.service_arguments']
+    arguments:
+      - '@messenger.bus.default'
+  KacperWojtaszczyk\SimpleRssReader\Security\UserAuthenticator: ~
+  KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\AtomGateway:
+    public: true
+    arguments:
+      - '@eight_points_guzzle.client.atom'
+  KacperWojtaszczyk\SimpleRssReader\Infrastructure\Handler\RefreshFeedHandler:
+    arguments:
+      - '@KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\AtomGateway'
+      - '@KacperWojtaszczyk\SimpleRssReader\Repository\Feed\EntryRepository'
+      - '@KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository'
+      - '@doctrine.orm.entity_manager'
+      - '@messenger.bus.default'
+  KacperWojtaszczyk\SimpleRssReader\Infrastructure\Handler\CreateFeedHandler:
+    arguments:
+      - '@KacperWojtaszczyk\SimpleRssReader\Infrastructure\Gateway\AtomGateway'
+      - '@KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository'
+      - '@doctrine.orm.entity_manager'
+      - '@messenger.bus.default'
+  KacperWojtaszczyk\SimpleRssReader\Form\UserType:
+    tags:
+      - { name: form.type, alias: user_registration }
