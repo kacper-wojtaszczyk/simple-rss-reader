@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% block title %}Register{% endblock %}
+{% block title_h1 %}Register{% endblock %}
+{% block body %}
+    {% block fos_user_content %}
+        {% include "@FOSUser/Registration/register_content.html.twig" %}
+    {% endblock fos_user_content %}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/register.js') }}"></script>
+{% endblock %}

@@ -36,3 +36,6 @@ services:
       - '@KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository'
       - '@doctrine.orm.entity_manager'
       - '@messenger.bus.default'
+  KacperWojtaszczyk\SimpleRssReader\Form\UserType:
+    tags:
+      - { name: form.type, alias: user_registration }

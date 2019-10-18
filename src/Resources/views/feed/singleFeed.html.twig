@@ -1,0 +1,9 @@
+<div class="feedHeader twelve columns">
+    <h2>
+        {% if feed.logo %}<img class="feedIcon" src="{{ feed.logo }}" />
+        {% elseif feed.icon %}<img class="feedIcon" src="{{ feed.icon }}" />
+        {% endif %}
+        {{ feed.title }}
+    </h2>
+    {{ dump(feed.author) }}
+</div>

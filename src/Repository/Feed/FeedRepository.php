@@ -20,6 +20,13 @@ class FeedRepository extends ServiceEntityRepository
         parent::__construct($registry, Feed::class);
     }
 
+    public function findAllHeadings()
+    {
+        return $this->createQueryBuilder('f')
+            ->select('f.id', 'f.title', 'f.icon', 'f.logo')
+            ->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Feed[] Returns an array of Feed objects
     //  */

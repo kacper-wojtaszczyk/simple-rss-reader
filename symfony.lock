@@ -129,6 +129,9 @@
     "facebook/webdriver": {
         "version": "1.7.1"
     },
+    "friendsofsymfony/user-bundle": {
+        "version": "v2.1.2"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
     },
@@ -497,6 +500,22 @@
     "symfony/stopwatch": {
         "version": "v4.3.5"
     },
+    "symfony/templating": {
+        "version": "v4.3.5"
+    },
+    "symfony/translation": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "2ad9d2545bce8ca1a863e50e92141f0b9d87ffcd"
+        },
+        "files": [
+            "config/packages/translation.yaml",
+            "translations/.gitignore"
+        ]
+    },
     "symfony/translation-contracts": {
         "version": "v1.1.7"
     },
@@ -515,6 +534,19 @@
             "config/packages/twig.yaml",
             "config/routes/dev/twig.yaml",
             "templates/base.html.twig"
+        ]
+    },
+    "symfony/validator": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "d902da3e4952f18d3bf05aab29512eb61cabd869"
+        },
+        "files": [
+            "config/packages/test/validator.yaml",
+            "config/packages/validator.yaml"
         ]
     },
     "symfony/var-dumper": {

@@ -1,0 +1,12 @@
+fos_user:
+  db_driver: orm
+  firewall_name: main
+  user_class: KacperWojtaszczyk\SimpleRssReader\Model\User\User
+  service:
+    mailer: fos_user.mailer.noop
+  from_email:
+    address: "example@example.com"
+    sender_name: "Example"
+  registration:
+    form:
+      type: KacperWojtaszczyk\SimpleRssReader\Form\UserType

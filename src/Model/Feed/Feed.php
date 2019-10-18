@@ -29,7 +29,7 @@ class Feed
     private $title;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="object", nullable=true)
      * @var Link[]|ArrayCollection
      */
     private $link;
@@ -41,7 +41,7 @@ class Feed
     private $rights;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="object", nullable=true)
      * @var Person[]|ArrayCollection
      */
     private $author;
@@ -77,7 +77,7 @@ class Feed
     private $category;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="object", nullable=true)
      * @var Person[]|ArrayCollection
      */
     private $contributor;
@@ -168,7 +168,7 @@ class Feed
     /**
      * @return string
      */
-    public function getRights(): string
+    public function getRights(): ?string
     {
         return $this->rights;
     }
@@ -204,7 +204,7 @@ class Feed
     /**
      * @return string
      */
-    public function getIcon(): string
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
@@ -222,7 +222,7 @@ class Feed
     /**
      * @return string
      */
-    public function getSubtitle(): string
+    public function getSubtitle(): ?string
     {
         return $this->subtitle;
     }
@@ -240,7 +240,7 @@ class Feed
     /**
      * @return string
      */
-    public function getLogo(): string
+    public function getLogo(): ?string
     {
         return $this->logo;
     }
@@ -276,7 +276,7 @@ class Feed
     /**
      * @return ArrayCollection|Category[]
      */
-    public function getCategory()
+    public function getCategory(): ?ArrayCollection
     {
         return $this->category;
     }
@@ -312,7 +312,7 @@ class Feed
     /**
      * @return string
      */
-    public function getGenerator(): string
+    public function getGenerator(): ?string
     {
         return $this->generator;
     }
