@@ -1,9 +1,9 @@
 framework:
-    messenger:
-        failure_transport: failed
-        transports:
-            refresh_feed: '%env(MESSENGER_REFRESH_FEED_DSN)%'
-            failed: '%env(MESSENGER_FAILED_DSN)%'
+  messenger:
+    failure_transport: failed
+    transports:
+      refresh_feed: '%env(MESSENGER_REFRESH_FEED_DSN)%'
+      failed: '%env(MESSENGER_FAILED_DSN)%'
 
-        routing:
-            'KacperWojtaszczyk\SimpleRssReader\Infrastructure\Message\RefreshFeed': refresh_feed
+    routing:
+      'KacperWojtaszczyk\SimpleRssReader\Infrastructure\Message\RefreshFeed': refresh_feed
