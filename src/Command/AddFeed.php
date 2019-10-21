@@ -29,8 +29,7 @@ final class AddFeed extends Command
         $this
             ->setDescription('Adds a new feed')
             ->setHelp('This command adds a new RSS feed')
-            ->addArgument('url', InputArgument::REQUIRED, 'url to RSS feed')
-        ;
+            ->addArgument('url', InputArgument::REQUIRED, 'url to RSS feed');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -42,7 +41,7 @@ final class AddFeed extends Command
         try {
             $this->bus->dispatch(CreateFeed::forUrl($url));
         } catch (\Exception $e) {
-            $output->writeln('<error>' .$e->getMessage(). '</error>');
+            $output->writeln('<error>' . $e->getMessage() . '</error>');
             return;
         }
         $output->writeln('Successfully created feed. Go to frontend to see it in action');

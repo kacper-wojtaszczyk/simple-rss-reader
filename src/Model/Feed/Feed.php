@@ -116,7 +116,6 @@ class Feed
     private $word;
 
 
-
     public static function withIdAndUrl(string $id, string $url): self
     {
         $self = new self;

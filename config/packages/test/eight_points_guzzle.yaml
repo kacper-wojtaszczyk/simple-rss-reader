@@ -4,7 +4,7 @@
 eight_points_guzzle:
   clients:
     atom:
-#      handler: 'testHandler'
+      #      handler: 'testHandler'
       options:
         debug: false
         timeout: 10

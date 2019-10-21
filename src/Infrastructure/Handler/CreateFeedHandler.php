@@ -58,16 +58,14 @@ final class CreateFeedHandler implements MessageHandlerInterface
     {
 
             $feedDTO = $this->gateway->requestFeed($message->getUrl());
-            if($this->feedRepository->find($feedDTO->id))
-            {
+            if ($this->feedRepository->find($feedDTO->id)) {
                 throw FeedAlreadyExistsException::withFeedId($feedDTO->id);
             }
             $feedMapper = new FeedMapper();
             $feed = $feedMapper->map($feedDTO, Feed::withIdAndUrl($feedDTO->id, $message->getUrl()));
             $this->em->persist($feed);
             $entryMapper = new EntryMapper();
-            foreach($feedDTO->entry as $entryDTO)
-            {
+            foreach ($feedDTO->entry as $entryDTO) {
                 $entry = $entryMapper->map($entryDTO, Entry::withIdAndFeed($entryDTO->id, $feed));
                 $this->em->persist($entry);
                 $this->wordUpdateService->forEntry($entry);
