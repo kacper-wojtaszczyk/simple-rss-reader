@@ -36,6 +36,8 @@ final class AddFeed extends Command
     {
         $url = $input->getArgument('url');
 
+        $output->writeln('Adding a feed. This might take a minute');
+
         try {
             $this->bus->dispatch(CreateFeed::forUrl($url));
         } catch (\Exception $e) {

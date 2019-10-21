@@ -1,3 +1,5 @@
+imports:
+  - { resource: 'simple_rss_reader.yaml' }
 parameters:
 
 services:
@@ -13,6 +15,7 @@ services:
 
   KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository: ~
   KacperWojtaszczyk\SimpleRssReader\Repository\Feed\EntryRepository: ~
+  KacperWojtaszczyk\SimpleRssReader\Repository\Feed\WordRepository: ~
   KacperWojtaszczyk\SimpleRssReader\Repository\User\UserRepository: ~
   KacperWojtaszczyk\SimpleRssReader\Command\AddFeed:
     tags: ['controller.service_arguments']
@@ -39,3 +42,9 @@ services:
   KacperWojtaszczyk\SimpleRssReader\Form\UserType:
     tags:
       - { name: form.type, alias: user_registration }
+
+  KacperWojtaszczyk\SimpleRssReader\Service\WordUpdateService:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@KacperWojtaszczyk\SimpleRssReader\Repository\Feed\WordRepository'
+      - '%word_blacklist%'

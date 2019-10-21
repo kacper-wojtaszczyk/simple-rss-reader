@@ -114,7 +114,12 @@ final class FeedParser
                     break;
                 case 'updated':
                     $this->reader->read();
-                    $feed->updated = new \DateTime($this->reader->value);
+                    try{
+                        $feed->updated = new \DateTime($this->reader->value);
+                    } catch(\Exception $e) {
+                        $feed->updated = \DateTime::createFromFormat("Y-m-d\TH:i:s.uP", "2017-07-25T15:25:16.123456+02:00");
+                    }
+
                     break;
                 case 'category':
                     $category = Category::withTerm($this->reader->getAttribute('term'));
@@ -201,7 +206,11 @@ final class FeedParser
                     break;
                 case 'updated':
                     $this->reader->read();
-                    $entry->updated = new \DateTime($this->reader->value);
+                    try{
+                        $entry->updated = new \DateTime($this->reader->value);
+                    } catch(\Exception $e) {
+                        $entry->updated = \DateTime::createFromFormat("Y-m-d\TH:i:s.uP", "2017-07-25T15:25:16.123456+02:00");
+                    }
                     break;
                 case 'category':
                     $category = Category::withTerm($this->reader->getAttribute('term'));
@@ -216,7 +225,11 @@ final class FeedParser
                     break;
                 case 'published':
                     $this->reader->read();
-                    $entry->published = new \DateTime($this->reader->value);
+                    try{
+                        $entry->published = new \DateTime($this->reader->value);
+                    } catch(\Exception $e) {
+                        $entry->published = \DateTime::createFromFormat("Y-m-d\TH:i:s.uP", "2017-07-25T15:25:16.123456+02:00");
+                    }
                     break;
                 case 'summary':
                     $this->reader->read();

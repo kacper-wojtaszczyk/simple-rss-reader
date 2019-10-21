@@ -5,5 +5,76 @@
         {% endif %}
         {{ feed.title }}
     </h2>
-    {{ dump(feed.author) }}
+    <div class="row">
+        <div class="six columns">
+            <h4>{{ feed.subtitle }}</h4>
+        </div>
+        <div class="six columns">
+            <h5>Most popular words: </h5>
+            <div>
+                <ol id="popular">
+                    {% for word in topWords %}
+                        <li>"{{ word.word }}": {{ word.count }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div id="entries twelve columns">
+    <div class="row">
+    {% for entry in feed.entry %}
+
+        <div class="entry six columns">
+            <div class="row">
+                <h5 class="eleven columns">{{ entry.title }}</h5>
+                <div class="entryDate one column">{{ entry.updated|date("d.m.y") }}<br />{{ entry.updated|date("h:i") }}</div>
+            </div>
+            {% if entry.summary %}
+            <p>{{ entry.summary|striptags }}</p>
+            {% endif %}
+            <div class="row">
+
+                <div class="eight columns">
+                    {% if entry.author|length > 0 %}
+                    <span>Authors:</span>
+                    {% for author in entry.author %}
+                        <br />
+                        {% if author.uri %}<a href="{{ author.uri }}" target="_blank"> {{ author.name }}</a>
+                        {% else %} {{ author.name }} {% endif %}
+                        {% if author.email %} - <a href="mailto:{{ author.email }}">{{ author.email }}</a>{% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% if entry.contributor|length > 0 %}
+                        <span>Contributors:</span>
+                        {% for contributor in entry.contributor %}
+                            <br />
+                            {% if contributor.uri %}<a href="{{ contributor.uri }}" target="_blank"> {{ contributor.name }}</a>
+                            {% else %} {{ contributor.name }} {% endif %}
+                            {% if contributor.email %} - <a href="mailto:{{ author.email }}">{{ contributor.email }}</a>{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="four columns">
+                    {% if entry.link|length > 0 %}
+                    <span>Links:</span>
+                    {% for link in entry.link %}
+                        <br />
+                        <a href="{{ link.href }}" target="_blank"> Read more 🔗</a>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+
+        {% if loop.last %}
+        </div>
+        {% elseif not loop.index%2 %}
+        </div><div class="row">
+        {% endif %}
+    {% endfor %}
 </div>

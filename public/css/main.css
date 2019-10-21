@@ -76,7 +76,9 @@ body {
         height: 26px;
     }
 }
-
+.feedHeader {
+    margin-bottom: 4em;
+}
 .error .emailToValidate {
     background-color: #ff8888;
 }
@@ -91,4 +93,32 @@ body {
 .feedIcon {
     height: 1em;
     vertical-align: middle;
+}
+.entryDate {
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+    line-height: 1.1em;
+    text-align: center;
+}
+.entry {
+    margin-bottom: 3em;
+}
+#feedsList {
+    list-style: none;
+    display: block;
+}
+#feedsList li {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #e1e1e1;
+    margin-right: 10px;
+    cursor: pointer;
+}
+#popular
+{
+    list-style: decimal;
+}
+#popular li {
+    width: 48%;
+    display: inline-block;
 }

@@ -9,7 +9,7 @@ class NoFeedExistsException extends UnrecoverableMessageHandlingException
 {
     public static function create(): self
     {
-        $message = sprintf('There are no feeds in your database. Use srr:feedadd command.');
+        $message = sprintf('There are no feeds in your database. Use srr:feed:add command.');
 
         return new self($message);
     }

@@ -30,13 +30,13 @@ class Entry
     private $updated;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="object", nullable=true)
      * @var Person[]|ArrayCollection
      */
     private $author;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="object", nullable=true)
      * @var Link[]|ArrayCollection
      */
     private $link;
@@ -60,13 +60,13 @@ class Entry
     private $category;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="object", nullable=true)
      * @var Content
      */
     private $content;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="object", nullable=true)
      * @var Person[]|ArrayCollection
      */
     private $contributor;
@@ -130,7 +130,8 @@ class Entry
      */
     public function getAuthor()
     {
-        if ($this->author === null) {
+        if($this->author->count() === 0)
+        {
             return $this->getFeed()->getAuthor();
         }
         return $this->author;
@@ -190,7 +191,7 @@ class Entry
     /**
      * @return string
      */
-    public function getSummary(): string
+    public function getSummary(): ?string
     {
         return $this->summary;
     }
@@ -199,7 +200,7 @@ class Entry
      * @param string $summary
      * @return Entry
      */
-    public function setSummary(string $summary): self
+    public function setSummary(string $summary = null): self
     {
         $this->summary = $summary;
         return $this;
@@ -224,9 +225,9 @@ class Entry
     }
 
     /**
-     * @return Content
+     * @return Content|null
      */
-    public function getContent(): Content
+    public function getContent(): ?Content
     {
         return $this->content;
     }
