@@ -28,8 +28,7 @@ final class UserType extends AbstractType
                 'first_options' => ['label' => 'form.password'],
                 'second_options' => ['label' => 'form.password_confirmation'],
                 'invalid_message' => 'fos_user.password.mismatch',
-            ])
-        ;
+            ]);
     }
 
     public function getBlockPrefix()

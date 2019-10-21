@@ -107,11 +107,6 @@ class Entry
         return $this->id;
     }
 
-    public function getFeed(): Feed
-    {
-        return $this->feed;
-    }
-
     /**
      * @return \DateTime
      */
@@ -150,6 +145,11 @@ class Entry
     {
         $this->author = $author;
         return $this;
+    }
+
+    public function getFeed(): Feed
+    {
+        return $this->feed;
     }
 
     /**
@@ -283,8 +283,7 @@ class Entry
      */
     public function getRights(): string
     {
-        if($this->rights === null)
-        {
+        if ($this->rights === null) {
             return $this->getFeed()->getRights();
         }
         return $this->rights;

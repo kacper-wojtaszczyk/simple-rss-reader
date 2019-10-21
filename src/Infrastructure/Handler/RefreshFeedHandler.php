@@ -74,14 +74,11 @@ final class RefreshFeedHandler implements MessageHandlerInterface
             $feed = $feedMapper->map($feedDTO, $feed);
             $this->em->persist($feed);
             $entryMapper = new EntryMapper();
-            foreach($feedDTO->entry as $entryDTO)
-            {
-                if($entry = $this->entryRepository->findOneById($entryDTO->id, $feed))
-                {
+            foreach ($feedDTO->entry as $entryDTO) {
+                if ($entry = $this->entryRepository->findOneById($entryDTO->id, $feed)) {
                     $entry = $entryMapper->map($entryDTO, $entry);
                     $this->em->persist($entry);
-                }
-                else {
+                } else {
                     $entry = $entryMapper->map($entryDTO, Entry::withIdAndFeed($entryDTO->id, $feed));
                     $this->em->persist($entry);
                     $this->wordUpdateService->forEntry($entry);

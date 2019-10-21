@@ -64,8 +64,7 @@ class UserController
      */
     public function validateEmail(Request $request): Response
     {
-        if(null !== $this->userRepository->findOneBy(['email' => $request->request->get('email')]))
-        {
+        if (null !== $this->userRepository->findOneBy(['email' => $request->request->get('email')])) {
             return JsonResponse::create(true, Response::HTTP_CONFLICT);
         }
         return JsonResponse::create(true, Response::HTTP_OK);
