@@ -4,7 +4,7 @@
 eight_points_guzzle:
   clients:
     atom:
-      #      handler: 'testHandler'
+      handler: 'KacperWojtaszczyk\SimpleRssReader\Tests\AtomMockHandler'
       options:
         debug: false
         timeout: 10
