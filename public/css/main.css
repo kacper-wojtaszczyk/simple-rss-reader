@@ -110,7 +110,15 @@ body {
 #feedsList li {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #eeeeee;
+    background-color: #e1e1e1;
     margin-right: 10px;
     cursor: pointer;
+}
+#popular
+{
+    list-style: decimal;
+}
+#popular li {
+    width: 48%;
+    display: inline-block;
 }

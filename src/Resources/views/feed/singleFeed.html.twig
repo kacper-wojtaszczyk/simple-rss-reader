@@ -11,7 +11,13 @@
         </div>
         <div class="six columns">
             <h5>Most popular words: </h5>
-            <div class="popular"><ol></ol></div>
+            <div>
+                <ol id="popular">
+                    {% for word in topWords %}
+                        <li>"{{ word.word }}": {{ word.count }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
         </div>
     </div>
 

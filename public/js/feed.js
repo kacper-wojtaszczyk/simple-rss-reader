@@ -1,5 +1,7 @@
+let delayTimer;
 $(document).ready(function () {
     renderHeadings();
+
 });
 
 function renderHeadings() {
@@ -20,7 +22,8 @@ function renderSingleFeedHeading(heading) {
 }
 
 function renderSingleFeedBody(id) {
-    showOverlay
+    showOverlay();
+    clearTimeout(delayTimer);
     $.ajax(
         '/_ajax/single-feed',
         {
@@ -31,6 +34,10 @@ function renderSingleFeedBody(id) {
             },
             success: function (data) {
                 $('#feedHolder').html(data);
+
+                setTimeout(function () { //refresh view after 2 minutes
+                    renderSingleFeedBody(id);
+                }, 120000);
                 hideOverlay();
             },
             dataType: 'html'

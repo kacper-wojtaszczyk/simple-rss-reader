@@ -5,6 +5,7 @@ namespace KacperWojtaszczyk\SimpleRssReader\Repository\Feed;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Feed;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Word;
 
 /**
@@ -20,32 +21,25 @@ class WordRepository extends ServiceEntityRepository
         parent::__construct($registry, Word::class);
     }
 
-    // /**
-    //  * @return Word[] Returns an array of Word objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findOneByWord(string $word, Feed $feed): ?Word
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.word = :word')
+            ->andWhere('e.feed = :feed')
+            ->setParameters(['word' => $word, 'feed' => $feed])
             ->getQuery()
-            ->getResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Word
+    public function findTopxByFeed(int $count, Feed $feed)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.feed = :feed')
+            ->orderBy('e.count', 'DESC')
+            ->setMaxResults($count)
+            ->setParameters(['feed' => $feed])
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+
 }

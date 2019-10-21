@@ -12,6 +12,7 @@ use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Entry;
 use KacperWojtaszczyk\SimpleRssReader\Model\Feed\Exception\FeedNotExistsException;
 use KacperWojtaszczyk\SimpleRssReader\Repository\Feed\EntryRepository;
 use KacperWojtaszczyk\SimpleRssReader\Repository\Feed\FeedRepository;
+use KacperWojtaszczyk\SimpleRssReader\Service\WordUpdateService;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
@@ -43,14 +44,20 @@ final class RefreshFeedHandler implements MessageHandlerInterface
      */
     private $bus;
 
-    public function __construct(GatewayInterface $gateway, EntryRepository $entryRepository,
-                                FeedRepository $feedRepository, EntityManager $em, MessageBusInterface $bus)
+    /**
+     * @var WordUpdateService
+     */
+    private $wordUpdateService;
+
+    public function __construct(GatewayInterface $gateway, EntryRepository $entryRepository, FeedRepository $feedRepository,
+                                EntityManager $em, MessageBusInterface $bus, WordUpdateService $wordUpdateService)
     {
         $this->gateway = $gateway;
         $this->feedRepository = $feedRepository;
         $this->em = $em;
         $this->entryRepository = $entryRepository;
         $this->bus = $bus;
+        $this->wordUpdateService = $wordUpdateService;
     }
 
     public function __invoke(RefreshFeed $message)
@@ -77,13 +84,14 @@ final class RefreshFeedHandler implements MessageHandlerInterface
                 else {
                     $entry = $entryMapper->map($entryDTO, Entry::withIdAndFeed($entryDTO->id, $feed));
                     $this->em->persist($entry);
+                    $this->wordUpdateService->forEntry($entry);
                 }
             }
             $this->em->flush();
         }
         finally {
                 $newMessage = RefreshFeed::forFeed($feed->getId());
-                $this->bus->dispatch($newMessage, [new DelayStamp(210000)]);
+                $this->bus->dispatch($newMessage, [new DelayStamp(120000)]);
         }
     }
 }

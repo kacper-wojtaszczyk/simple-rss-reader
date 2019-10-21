@@ -24,16 +24,18 @@ class Word
     private $count;
 
     /**
+     * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="Feed", inversedBy="word")
      * @var Feed
      */
     private $feed;
 
-    public static function withWord($word): self
+    public static function withWord(string $word, Feed $feed): self
     {
         $self = new self;
         $self->word = $word;
         $self->count = 0;
+        $self->feed = $feed;
         return $self;
     }
 
@@ -53,7 +55,7 @@ class Word
     /**
      * @return self
      */
-    public function addCount(int $add): self
+    public function addCount(int $add = 1): self
     {
         $this->count += $add;
         return $this;

@@ -225,9 +225,9 @@ class Entry
     }
 
     /**
-     * @return Content
+     * @return Content|null
      */
-    public function getContent(): Content
+    public function getContent(): ?Content
     {
         return $this->content;
     }
